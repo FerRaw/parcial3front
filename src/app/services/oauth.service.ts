@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -9,6 +9,12 @@ import { SocialUser } from '@abacritt/angularx-social-login';
   providedIn: 'root'
 })
 export class OauthService {
+
+  headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': 'https://parcial3front-fernandos-projects-528f4e5e.vercel.app'
+    // Agrega otros encabezados según sea necesario
+  });
   
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -19,7 +25,7 @@ export class OauthService {
     const backendUrl = 'https://parcial3back-amjirhscr-fernandos-projects-528f4e5e.vercel.app/logged';
 
     // Send a POST request to the backend with the idToken
-    this.http.post(backendUrl, { idtoken: user.idToken }).subscribe(
+    this.http.post(backendUrl, { idtoken: user.idToken }, {headers: this.headers}).subscribe(
       (response) => {
         console.log(response)
         console.log('Token verification success:', response);
@@ -38,8 +44,7 @@ export class OauthService {
 
   getLineas(): Observable<any> {
     //return this.http.get('http://localhost:8000/lineas/');
-    return this.http.get('https://parcial3back-amjirhscr-fernandos-projects-528f4e5e.vercel.app/lineas/');
-;
+    return this.http.get('https://parcial3back-amjirhscr-fernandos-projects-528f4e5e.vercel.app/lineas/', {headers: this.headers});
   }
 
   getForm1(codLinea: string, sentido: string): Observable<any> {
