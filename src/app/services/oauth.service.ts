@@ -15,7 +15,8 @@ export class OauthService {
 
   verifyToken(user: SocialUser): void {
     // Define your backend API URL
-    const backendUrl = 'http://localhost:8000/logged';
+    //const backendUrl = 'http://localhost:8000/logged';
+    const backendUrl = 'https://parcial3back-amjirhscr-fernandos-projects-528f4e5e.vercel.app/logged';
 
     // Send a POST request to the backend with the idToken
     this.http.post(backendUrl, { idtoken: user.idToken }).subscribe(
@@ -36,8 +37,9 @@ export class OauthService {
   }
 
   getLineas(): Observable<any> {
-    return this.http.get('http://localhost:8000/lineas/');
-    //return this.http.get<any>(url);
+    //return this.http.get('http://localhost:8000/lineas/');
+    return this.http.get('https://parcial3back-amjirhscr-fernandos-projects-528f4e5e.vercel.app//lineas/');
+;
   }
 
   getForm1(codLinea: string, sentido: string): Observable<any> {
@@ -67,17 +69,17 @@ export class OauthService {
   }
 
   getPujas(id: string): Observable<any> {
-    const url = `http://172.31.26.175:8000/pujas/producto/${id}/`;
+    const url = `http://localhost:8000/pujas/producto/${id}/`;
     return this.http.get<any>(url);
   }
 
   crearPuja(puja: any): Observable<any> {
-    const url = `http://172.31.26.175:8000/pujas/create/`;
+    const url = `http://localhost:8000/pujas/create/`;
     return this.http.post<any>(url, puja);
   }
 
   createProducto(producto: any): Observable<any> {
-    const url = `http://172.31.26.175:8000/articulos/create/`;
+    const url = `http://localhost:8000/articulos/create/`;
     return this.http.post<any>(url, producto);
   }
 
