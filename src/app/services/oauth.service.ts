@@ -16,7 +16,7 @@ export class OauthService {
   verifyToken(user: SocialUser): void {
     // Define your backend API URL
     //const backendUrl = 'http://localhost:8000/logged';
-    const backendUrl = 'https://parcial3back-amjirhscr-fernandos-projects-528f4e5e.vercel.app/logged';
+    const backendUrl = 'https://parcial3front-fernandos-projects-528f4e5e.vercel.app/logged';
 
     // Send a POST request to the backend with the idToken
     this.http.post(backendUrl, { idtoken: user.idToken }).subscribe(
@@ -38,12 +38,13 @@ export class OauthService {
 
   getLineas(): Observable<any> {
     //return this.http.get('http://localhost:8000/lineas/');
-    return this.http.get('https://parcial3back-amjirhscr-fernandos-projects-528f4e5e.vercel.app//lineas/');
+    return this.http.get('https://parcial3front-fernandos-projects-528f4e5e.vercel.app/lineas/');
 ;
   }
 
   getForm1(codLinea: string, sentido: string): Observable<any> {
-    const url = `http://localhost:8000/lineas/${codLinea}/${sentido}/`;
+    //const url = `http://localhost:8000/lineas/${codLinea}/${sentido}/`;
+    const url = `https://parcial3front-fernandos-projects-528f4e5e.vercel.app/${codLinea}/${sentido}/`;
     console.log(this.http.get<any>(url));
     return this.http.get<any>(url);
   }
