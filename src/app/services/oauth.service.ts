@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -9,23 +9,16 @@ import { SocialUser } from '@abacritt/angularx-social-login';
   providedIn: 'root'
 })
 export class OauthService {
-
-  headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': 'https://parcial3front-fernandos-projects-528f4e5e.vercel.app'
-    // Agrega otros encabezados según sea necesario
-  });
   
 
   constructor(private http: HttpClient, private router: Router) { }
 
   verifyToken(user: SocialUser): void {
     // Define your backend API URL
-    //const backendUrl = 'http://localhost:8000/logged';
-    const backendUrl = 'https://parcial3back-amjirhscr-fernandos-projects-528f4e5e.vercel.app/logged';
+    const backendUrl = 'http://localhost:8000/logged';
 
     // Send a POST request to the backend with the idToken
-    this.http.post(backendUrl, { idtoken: user.idToken }, {headers: this.headers}).subscribe(
+    this.http.post(backendUrl, { idtoken: user.idToken }).subscribe(
       (response) => {
         console.log(response)
         console.log('Token verification success:', response);
@@ -42,52 +35,20 @@ export class OauthService {
     );
   }
 
-  getLineas(): Observable<any> {
-    //return this.http.get('http://localhost:8000/lineas/');
-    return this.http.get('https://parcial3back-amjirhscr-fernandos-projects-528f4e5e.vercel.app/lineas/', {headers: this.headers});
+  getEventos(): Observable<any> {
+    return this.http.get('http://localhost:8000/eventos/');
+    //return this.http.get<any>(url);
   }
 
-  getForm1(codLinea: string, sentido: string): Observable<any> {
-    //const url = `http://localhost:8000/lineas/${codLinea}/${sentido}/`;
-    const url = `https://parcial3front-fernandos-projects-528f4e5e.vercel.app/${codLinea}/${sentido}/`;
-    console.log(this.http.get<any>(url));
+  getCoordenadas(cadena: string): Observable<any> {
+    const url = `http://localhost:8000/form/${cadena}/`;
     return this.http.get<any>(url);
   }
-
-  getForm2(parada: string): Observable<any> {
-    const url = `http://localhost:8000/paradas/${parada}/`;
-    console.log(this.http.get<any>(url));
-    return this.http.get<any>(url);
-  }
-
-  getProductos(): Observable<any> {
-    return this.http.get('http://localhost:8000/articulos/');
-  }
-
-  getProducto(id: string): Observable<any> {
-    const url = `http://localhost:8000/articulo/${id}/`;
-    return this.http.get<any>(url);
-  }
-
-  getUltimaPuja(id: string): Observable<any> {
-    const url = `http://localhost:8000/pujas/last/${id}/`;
-    return this.http.get<any>(url);
-  }
-
-  getPujas(id: string): Observable<any> {
-    const url = `http://localhost:8000/pujas/producto/${id}/`;
-    return this.http.get<any>(url);
-  }
-
-  crearPuja(puja: any): Observable<any> {
-    const url = `http://localhost:8000/pujas/create/`;
-    return this.http.post<any>(url, puja);
-  }
-
-  createProducto(producto: any): Observable<any> {
-    const url = `http://localhost:8000/articulos/create/`;
+  createEvento(producto: any): Observable<any> {
+    const url = `http://localhost:8000/eventos/create/`;
+    ///const url = `http://172.31.26.175:8000/evento/create/`;
     return this.http.post<any>(url, producto);
-  }
+  }  
 
   uploadImage(files: File[]): Observable<any> {
     const formData = new FormData();

@@ -1,52 +1,30 @@
 import { Routes } from '@angular/router';
-import { InicioComponent } from './features/inicio/inicio.component';
-import { MapComponent } from './features/map/map.component';
 import { OauthComponent } from './features/oauth/oauth.component';
-import { InicioEmtComponent } from './features/inicio-emt/inicio-emt.component';
-import { InicioVentasComponent } from './features/inicio-ventas/inicio-ventas.component';
-import { PujarComponent } from './features/pujar/pujar.component';
 import { CrearProductoComponent } from './features/crear-producto/crear-producto.component';
-import { LogoutComponent } from './features/logout/logout.component';
+import { EventosComponent } from './features/eventos/eventos.component';
+import { UpdEventoComponent } from './features/upd-evento/upd-evento.component';
 
 export const routes: Routes = [
+    
     {
         path: 'login',
         component: OauthComponent,
         title: 'Iniciar sesión'
     },
-    {   
-        path: 'logout',
-        component: LogoutComponent,
-        title: 'Cerrar sesión'
+    {
+        path: 'eventos',
+        component: EventosComponent,
+        title: 'Eventos'
+    },
+    {
+        path: 'crearEvento',
+        component: CrearProductoComponent,
+        title: 'Crear Evento'
+    },
+    {
+        path: 'updEvento',
+        component: UpdEventoComponent,
+        title: 'Actualiza Articulo'
     },
     
-    /*{
-        path: 'map',
-        component: MapComponent,
-        title: 'Mapa'
-    },*/
-    {
-        path: 'inicioEmt',
-        component: InicioEmtComponent,
-        title: 'Inicio EMT'
-    },
-    {
-        path: 'articulos',
-        component: InicioVentasComponent,
-        title: 'Venta Articulos'
-    },
-    {
-        path: 'articulo/:id',
-        component: PujarComponent,
-        title: 'Puja Articulo'
-    },
-    {
-        path: 'crearProducto',
-        component: CrearProductoComponent,
-        title: 'Crear Producto'   
-    },
-    {
-        path: '**',
-        redirectTo: 'inicio'
-    }
 ];
